@@ -5,6 +5,12 @@ window.addEventListener('load', function () {
 function colorClicked(color) {
     console.log("color clicked", color);
     // hmm
+    // if (color == 'red')
+    localStorage.setItem("color", color);
+    // else if (color == 'green')
+    //     this.response.greenClicks ++
+    // else
+    //     this.response.blueClicks ++
 }
 
 function updateClickLabels() {
@@ -13,8 +19,8 @@ function updateClickLabels() {
         if (this.readyState == 4 && this.status == 200) {
             var response = JSON.parse(this.responseText);
             document.getElementById("color-label-red").innerHTML = "red: " + response.redClicks
-            document.getElementById("color-label-green").innerHTML = "red: " + response.greenClicks
-            document.getElementById("color-label-blue").innerHTML = "red: " + response.blueClicks
+            document.getElementById("color-label-green").innerHTML = "green: " + response.greenClicks
+            document.getElementById("color-label-blue").innerHTML = "blue: " + response.blueClicks
         }
     };
     xhttp.open("GET", "/api/clicks", true);
