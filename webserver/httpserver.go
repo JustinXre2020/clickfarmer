@@ -29,6 +29,7 @@ func Run(ctx context.Context, httpAddr, rpcAddr, webdir string, cacheInterval ti
 	group.Go(func() error {
 		return apiServer.ServeHTTP(ctx)
 	})
+	
 	group.Go(func() error {
 		return apiServer.cache.loop.Run(ctx, apiServer.refreshCache)
 	})
@@ -116,6 +117,7 @@ func (a *APIServer) ServeHTTP(ctx context.Context) error {
 	// Reminder: we rely on the following API endpoints for testing your
 	// submission. If you change the below code, make sure the API continues
 	// to work. See more in the assignment README.md.
+
 	http.HandleFunc("/api/clicks", func(w http.ResponseWriter, r *http.Request) {
 		a.getClicksHandler(ctx, w, r)
 	})
@@ -135,6 +137,7 @@ func (a *APIServer) ServeHTTP(ctx context.Context) error {
 
 	// home page
 	http.HandleFunc("/", a.indexHandler)
+
 
 	return http.ListenAndServe(a.httpAddr, nil)
 }

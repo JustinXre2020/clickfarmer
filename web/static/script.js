@@ -5,12 +5,20 @@ window.addEventListener('load', function () {
 function colorClicked(color) {
     console.log("color clicked", color);
     // hmm
-    // if (color == 'red')
-    localStorage.setItem("color", color);
-    // else if (color == 'green')
-    //     this.response.greenClicks ++
-    // else
-    //     this.response.blueClicks ++
+    localStorage.setItem(color, localStorage.getItem(color) != null ? parseInt(localStorage.getItem(color)) + 1 : 1)
+ 
+    var xhttp = new XMLHttpRequest();
+    var data = parseInt(localStorage.getItem(color))
+    if (color == 'red') {
+        xhttp.open("PUT", "/api/clicks/red");
+    }
+    else if (color == 'green') {
+        xhttp.open("PUT", "/api/clicks/green");
+    }
+    else {
+        xhttp.open("PUT", "/api/clicks/blue");
+    }
+    xhttp.send(data);
 }
 
 function updateClickLabels() {
